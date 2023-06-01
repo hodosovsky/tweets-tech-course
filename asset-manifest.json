@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tweets-tech-course/static/css/main.7acaea2f.css",
+    "main.js": "/tweets-tech-course/static/js/main.883ba378.js",
+    "index.html": "/tweets-tech-course/index.html",
+    "main.7acaea2f.css.map": "/tweets-tech-course/static/css/main.7acaea2f.css.map",
+    "main.883ba378.js.map": "/tweets-tech-course/static/js/main.883ba378.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.883ba378.js"
+  ]
+}
