@@ -4,6 +4,7 @@ export const theme = {
     secondaryText: '#373737',
     white: '#fff',
     background: '#4B2A99',
+    avatarBackground: '#5736a3',
     followButtonBackground: '#EBD8FF',
     followButtonHover: '#CBA7FF',
     folowingButtonBackground: '#5CD3A8',
