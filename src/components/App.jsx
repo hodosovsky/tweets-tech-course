@@ -23,7 +23,6 @@ export const App = () => {
   const { data, isFetching } = useGetTweetsQuery('/');
   console.log('data:', data);
   const tweets = useSelector(getTweets);
-  console.log('tweets:', tweets);
 
   const [fetchUser] = useLazyGetTweetsQuery();
   useEffect(() => {
