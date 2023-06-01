@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { TweetsApi } from './api/tweetsApi';
+import { UsersApi } from './api/usersApi';
 
 import {
   persistStore,
@@ -14,23 +14,20 @@ import {
 } from 'redux-persist';
 
 import storage from 'redux-persist/lib/storage';
-import { TweetsSlice } from './slice/tweetsSlice';
+import { UsersSlice } from './slice/usersSlice';
 
 const twetsPersistConfig = {
-  key: 'tweets',
+  key: 'users',
   storage: storage,
-  whitelist: ['myTweets'],
+  whitelist: ['usersCollection'],
 };
 
-const persistedReducer = persistReducer(
-  twetsPersistConfig,
-  TweetsSlice.reducer
-);
+const persistedReducer = persistReducer(twetsPersistConfig, UsersSlice.reducer);
 
 export const store = configureStore({
   reducer: {
-    tweets: persistedReducer,
-    [TweetsApi.reducerPath]: TweetsApi.reducer,
+    users: persistedReducer,
+    [UsersApi.reducerPath]: UsersApi.reducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({
@@ -39,7 +36,7 @@ export const store = configureStore({
       },
     }),
 
-    TweetsApi.middleware,
+    UsersApi.middleware,
   ],
 });
 

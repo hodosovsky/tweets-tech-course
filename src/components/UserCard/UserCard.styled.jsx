@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const PictureStyled = styled.picture`
   position: absolute;
-
   top: 20px;
   left: 20px;
 `;

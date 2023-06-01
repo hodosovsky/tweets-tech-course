@@ -4,16 +4,16 @@ import picture1 from '../../images/picture-1.png';
 import picture2 from '../../images/picture-2.png';
 import logo1 from '../../images/logo.png';
 import logo2 from '../../images/logo-2.png';
-import { AvatarStyled, PictureStyled } from './Tweet.styled';
+import { AvatarStyled, PictureStyled } from './UserCard.styled';
 import { numberFormating } from 'helpers/helpers';
 import { Button } from 'components/Button/Button';
 
-export const Tweet = ({ tweet }) => {
+export const UserCard = ({ user }) => {
   return (
     <>
       <picture>
         <source srcSet={`${picture1} 1x, ${picture2} 2x`} />
-        <img src={picture1} alt="qa" />
+        <img src={picture1} alt="tweet" />
       </picture>
 
       <PictureStyled>
@@ -41,17 +41,17 @@ export const Tweet = ({ tweet }) => {
         boxShadow="0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06), inset 0px -2.19582px 4.39163px #AE7BE3, inset 0px 4.39163px 3.29372px #FBF8FF;"
         borderRadius="round"
       >
-        <AvatarStyled src={tweet.avatar} alt="avatar" />
+        <AvatarStyled src={user.avatar} alt="avatar" />
       </Box>
 
       <Box mt={86}>
-        <P>{tweet.tweets} tweets</P>
+        <P>{user.tweets} tweets</P>
         <Box mt={16} mb={26}>
-          <P>{numberFormating(tweet.followers)} Followers</P>
+          <P>{numberFormating(user.followers)} Followers</P>
         </Box>
       </Box>
-      <Button following={tweet.isFollowed}>
-        {tweet.isFollowed ? 'Following' : 'follow'}
+      <Button following={user.isFollowed}>
+        {user.isFollowed ? 'Following' : 'follow'}
       </Button>
     </>
   );

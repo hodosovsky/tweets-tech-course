@@ -4,15 +4,18 @@ export const StyledList = styled.ul`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
+  margin: 0;
+  padding: 26px 36px 36px 36px;
 `;
 
-export const StyledTweet = styled.li`
-  padding: 26px 36px 36px 36px;
+export const StyledCard = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  padding: 26px 36px 36px 36px;
   border-radius: ${p => p.theme.radii.normal};
   text-align: center;
   background: linear-gradient(

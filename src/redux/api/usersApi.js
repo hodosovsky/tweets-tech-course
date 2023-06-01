@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const TweetsApi = createApi({
-  reducerPath: 'tweetsApi',
+export const UsersApi = createApi({
+  reducerPath: 'UsersApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `https://643abc9190cd4ba5630062e8.mockapi.io`,
   }),
-  tagTypes: ['tweets'],
+  tagTypes: ['users'],
   endpoints: builder => ({
-    getTweets: builder.query({
+    getUsers: builder.query({
       query: () => ({
         url: '/users',
         method: 'GET',
@@ -16,4 +16,4 @@ export const TweetsApi = createApi({
   }),
 });
 
-export const { useGetTweetsQuery, useLazyGetTweetsQuery } = TweetsApi;
+export const { useGetUsersQuery, useLazyGetUsersQuery } = UsersApi;

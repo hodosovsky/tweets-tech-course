@@ -1,47 +1,26 @@
-import { RotatingLines } from 'react-loader-spinner';
 import { Box } from './Box/Box';
-import { getTweets } from '../redux/slice/tweetsSlice';
+import { getUsersCollection } from '../redux/slice/usersSlice';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useGetTweetsQuery, useLazyGetTweetsQuery } from 'redux/api/tweetsApi';
-import { TweetsList } from './TweetsList/TweetList';
+import { useGetUsersQuery, useLazyGetUsersQuery } from 'redux/api/usersApi';
+import { UserList } from './UsersList/UsersList';
+import { Loader } from './Loader/Loader';
 
 export const App = () => {
-  const { data, isFetching, isError, error } = useGetTweetsQuery('/');
-  console.log('data:', data);
-  const tweets = useSelector(getTweets);
+  const { data, isFetching, isError, error } = useGetUsersQuery();
+  console.log('error:', error);
+  const users = useSelector(getUsersCollection);
+  const [getUsers] = useLazyGetUsersQuery();
 
-  const [getFollowing] = useLazyGetTweetsQuery();
   useEffect(() => {
-    getFollowing(null, { skip: !tweets.id });
-  }, [getFollowing, tweets.id]);
+    getUsers(null, { skip: !users });
+  }, [getUsers, users]);
 
   return (
-    <Box
-      fontFamily="body"
-      bg="white"
-      color="text"
-      px={4}
-      py={5}
-      height="100%"
-      width="100%"
-      fontSize="m"
-      display="flex"
-      flexWrap="wrap"
-      justifyContent="center"
-      as="main"
-    >
-      {data && <TweetsList tweets={data} />}
+    <Box fontFamily="body" bg="white" color="text" fontSize="m" as="main">
+      {data && <UserList users={data} />}
 
-      {isFetching && (
-        <RotatingLines
-          strokeColor="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          width="96"
-          visible={true}
-        />
-      )}
+      {isFetching && <Loader />}
 
       {isError && <h1>{error?.data}</h1>}
     </Box>
