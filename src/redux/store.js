@@ -15,6 +15,7 @@ import {
 
 import storage from 'redux-persist/lib/storage';
 import { UsersSlice } from './slice/usersSlice';
+import { FollowSlice } from './slice/followSlice';
 
 const twetsPersistConfig = {
   key: 'users',
@@ -22,11 +23,18 @@ const twetsPersistConfig = {
   whitelist: ['usersCollection'],
 };
 
+const followPersistConfig = {
+  key: 'follow',
+  storage: storage,
+};
+
 const persistedReducer = persistReducer(twetsPersistConfig, UsersSlice.reducer);
+const followReducer = persistReducer(followPersistConfig, FollowSlice.reducer);
 
 export const store = configureStore({
   reducer: {
     users: persistedReducer,
+    follow: followReducer,
     [UsersApi.reducerPath]: UsersApi.reducer,
   },
   middleware: getDefaultMiddleware => [

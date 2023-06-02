@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const UsersApi = createApi({
   reducerPath: 'UsersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://643abc9190cd4ba5630062e8.mockapi.io`,
+    baseUrl: `https://6479c974a455e257fa63c546.mockapi.io/`,
   }),
   tagTypes: ['users'],
   endpoints: builder => ({
@@ -14,10 +14,10 @@ export const UsersApi = createApi({
       }),
     }),
     followTogle: builder.mutation({
-      query: ({ id, followers, isFollowed }) => ({
+      query: ({ id, followers }) => ({
         url: `/users/${id}`,
         method: 'PUT',
-        body: { followers, isFollowed },
+        body: { followers },
       }),
       invalidatesTags: ['Users'],
     }),

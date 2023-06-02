@@ -1,6 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+
 import { Box } from 'components/Box/Box';
 import { P } from 'components/P/P';
-import Notiflix from 'notiflix';
 import picture1 from '../../images/picture-1.png';
 import picture2 from '../../images/picture-2.png';
 import logo1 from '../../images/logo.png';
@@ -9,35 +11,40 @@ import { AvatarStyled, PictureStyled } from './UserCard.styled';
 import { numberFormating } from 'helpers/helpers';
 import { Button } from 'components/Button/Button';
 import { useFollowTogleMutation } from 'redux/api/usersApi';
-import { useState } from 'react';
+import { getUserFollow, setFollow } from 'redux/slice/followSlice';
 
 export const UserCard = ({ user }) => {
-  const [isFollowed, setIsFollowed] = useState(user?.isFollowed || false);
+  const dispatch = useDispatch();
   const [followers, setFollowers] = useState(user.followers);
 
-  const [userFollows, { isSuccess, isError }] = useFollowTogleMutation();
+  const [userFollows] = useFollowTogleMutation();
+  const userFollow = useSelector(getUserFollow);
 
   const handleTogleFollow = () => {
-    setIsFollowed(!isFollowed);
-    setFollowers(prevState => (isFollowed ? prevState - 1 : prevState + 1));
-
     const followed = {};
 
-    isFollowed
-      ? (followed.followers = followers - 1)
-      : (followed.followers = followers + 1);
-    followed.id = user.id;
-    followed.isFollowed = !isFollowed;
+    if (userFollow?.includes(user.id)) {
+      setFollowers(prevState => prevState - 1);
 
-    userFollows(followed);
+      followed.followers = followers - 1;
+      followed.id = user.id;
+
+      userFollows(followed);
+
+      dispatch(setFollow(userFollow.filter(el => el !== user.id)));
+    } else {
+      setFollowers(prevState => prevState + 1);
+
+      followed.followers = followers + 1;
+      followed.id = user.id;
+
+      userFollows(followed);
+
+      const updatedFollows = [...userFollow, user.id];
+
+      dispatch(setFollow(updatedFollows));
+    }
   };
-
-  isSuccess &&
-    (isFollowed
-      ? Notiflix.Notify.success('Added to follow')
-      : Notiflix.Notify.info('Removed from following'));
-
-  isError ?? Notiflix.Notify.failure('Something went wrong');
 
   return (
     <>
@@ -80,8 +87,11 @@ export const UserCard = ({ user }) => {
           <P>{numberFormating(followers)} Followers</P>
         </Box>
       </Box>
-      <Button following={isFollowed} onClick={handleTogleFollow}>
-        {isFollowed ? 'Following' : 'follow'}
+      <Button
+        following={userFollow?.includes(user.id)}
+        onClick={handleTogleFollow}
+      >
+        {userFollow?.includes(user.id) ? 'Following' : 'follow'}
       </Button>
     </>
   );

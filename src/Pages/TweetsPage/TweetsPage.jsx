@@ -9,6 +9,7 @@ const TweetsPage = () => {
   const { data, isFetching, isError, error } = useGetUsersQuery();
 
   const users = useSelector(getUsersCollection);
+
   const [getUsers] = useLazyGetUsersQuery();
 
   useEffect(() => {
