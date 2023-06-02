@@ -14,14 +14,11 @@ export const UsersApi = createApi({
       }),
     }),
     followTogle: builder.mutation({
-      query: ({ id, followers, isFollowed }) => {
-        console.log('id:', followers);
-        return {
-          url: `/users/${id}`,
-          method: 'PUT',
-          body: { followers, isFollowed },
-        };
-      },
+      query: ({ id, followers, isFollowed }) => ({
+        url: `/users/${id}`,
+        method: 'PUT',
+        body: { followers, isFollowed },
+      }),
       invalidatesTags: ['Users'],
     }),
   }),

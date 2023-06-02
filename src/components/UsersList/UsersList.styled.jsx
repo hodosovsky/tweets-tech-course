@@ -7,7 +7,6 @@ export const StyledList = styled.ul`
   justify-content: center;
   gap: 20px;
   margin: 0;
-  padding: 26px 36px 36px 36px;
 `;
 
 export const StyledCard = styled.li`

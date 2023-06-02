@@ -1,28 +1,20 @@
-import { Box } from './Box/Box';
-import { getUsersCollection } from '../redux/slice/usersSlice';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useGetUsersQuery, useLazyGetUsersQuery } from 'redux/api/usersApi';
-import { UserList } from './UsersList/UsersList';
-import { Loader } from './Loader/Loader';
+import { lazy } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
+import { Layout } from './Layout/Layout';
+const Tweets = lazy(() => import('../Pages/TweetsPage/TweetsPage'));
+const Home = lazy(() => import('../Pages/HomePage/HomePage'));
 
 export const App = () => {
-  const { data, isFetching, isError, error } = useGetUsersQuery();
-
-  const users = useSelector(getUsersCollection);
-  const [getUsers] = useLazyGetUsersQuery();
-
-  useEffect(() => {
-    getUsers(null, { skip: !users });
-  }, [getUsers, users]);
-
   return (
-    <Box fontFamily="body" bg="white" color="text" fontSize="m" as="main">
-      {data && <UserList users={data} />}
-
-      {isFetching && <Loader />}
-
-      {isError && <h1>{error?.data}</h1>}
-    </Box>
+    <BrowserRouter basename="tweets-tech-course">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/tweets" element={<Tweets />} />
+          <Route path="*" element={<Home />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
