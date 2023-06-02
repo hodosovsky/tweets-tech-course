@@ -8,7 +8,7 @@ import { Loader } from './Loader/Loader';
 
 export const App = () => {
   const { data, isFetching, isError, error } = useGetUsersQuery();
-  console.log('error:', error);
+
   const users = useSelector(getUsersCollection);
   const [getUsers] = useLazyGetUsersQuery();
 

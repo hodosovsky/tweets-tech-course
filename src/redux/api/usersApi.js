@@ -13,7 +13,22 @@ export const UsersApi = createApi({
         method: 'GET',
       }),
     }),
+    followTogle: builder.mutation({
+      query: ({ id, followers, isFollowed }) => {
+        console.log('id:', followers);
+        return {
+          url: `/users/${id}`,
+          method: 'PUT',
+          body: { followers, isFollowed },
+        };
+      },
+      invalidatesTags: ['Users'],
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useLazyGetUsersQuery } = UsersApi;
+export const {
+  useGetUsersQuery,
+  useLazyGetUsersQuery,
+  useFollowTogleMutation,
+} = UsersApi;

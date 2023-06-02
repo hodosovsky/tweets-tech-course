@@ -1,5 +1,6 @@
 import { Box } from 'components/Box/Box';
 import { P } from 'components/P/P';
+import Notiflix from 'notiflix';
 import picture1 from '../../images/picture-1.png';
 import picture2 from '../../images/picture-2.png';
 import logo1 from '../../images/logo.png';
@@ -7,8 +8,37 @@ import logo2 from '../../images/logo-2.png';
 import { AvatarStyled, PictureStyled } from './UserCard.styled';
 import { numberFormating } from 'helpers/helpers';
 import { Button } from 'components/Button/Button';
+import { useFollowTogleMutation } from 'redux/api/usersApi';
+import { useState } from 'react';
 
 export const UserCard = ({ user }) => {
+  const [isFollowed, setIsFollowed] = useState(user?.isFollowed || false);
+  const [followers, setFollowers] = useState(user.followers);
+
+  const [userFollows, { isSuccess, isError }] = useFollowTogleMutation();
+
+  const handleTogleFollow = () => {
+    setIsFollowed(!isFollowed);
+    setFollowers(prevState => (isFollowed ? prevState - 1 : prevState + 1));
+
+    const followed = {};
+
+    isFollowed
+      ? (followed.followers = followers - 1)
+      : (followed.followers = followers + 1);
+    followed.id = user.id;
+    followed.isFollowed = !isFollowed;
+
+    userFollows(followed);
+  };
+
+  isSuccess &&
+    (isFollowed
+      ? Notiflix.Notify.success('Added to follow')
+      : Notiflix.Notify.info('Removed from following'));
+
+  isError ?? Notiflix.Notify.failure('Something went wrong');
+
   return (
     <>
       <picture>
@@ -47,11 +77,11 @@ export const UserCard = ({ user }) => {
       <Box mt={86}>
         <P>{user.tweets} tweets</P>
         <Box mt={16} mb={26}>
-          <P>{numberFormating(user.followers)} Followers</P>
+          <P>{numberFormating(followers)} Followers</P>
         </Box>
       </Box>
-      <Button following={user.isFollowed}>
-        {user.isFollowed ? 'Following' : 'follow'}
+      <Button following={isFollowed} onClick={handleTogleFollow}>
+        {isFollowed ? 'Following' : 'follow'}
       </Button>
     </>
   );
