@@ -15,7 +15,6 @@ const TweetsPage = () => {
   const [filter, setFilter] = useState('all');
   const { data, isFetching, isError, error } = useGetUsersQuery();
   const followUsers = useSelector(getUserFollow);
-  console.log('followUsers:', followUsers);
 
   const userSort = useCallback(
     filter => {
