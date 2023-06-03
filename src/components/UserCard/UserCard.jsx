@@ -12,6 +12,7 @@ import { numberFormating } from 'helpers/helpers';
 import { Button } from 'components/Button/Button';
 import { useFollowTogleMutation } from 'redux/api/usersApi';
 import { getUserFollow, setFollow } from 'redux/slice/followSlice';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export const UserCard = ({ user }) => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export const UserCard = ({ user }) => {
       userFollows(followed);
 
       dispatch(setFollow(userFollow.filter(el => el !== user.id)));
+      Notify.info('Remove from followings');
     } else {
       setFollowers(prevState => prevState + 1);
 
@@ -43,6 +45,7 @@ export const UserCard = ({ user }) => {
       const updatedFollows = [...userFollow, user.id];
 
       dispatch(setFollow(updatedFollows));
+      Notify.success('Add to following');
     }
   };
 

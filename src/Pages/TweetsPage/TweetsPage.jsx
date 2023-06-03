@@ -33,12 +33,12 @@ const TweetsPage = () => {
   );
 
   useEffect(() => {
-    data &&
-      setUsers(prev => [
-        ...prev,
-        ...userSort(filter).slice(page * 6 - 6, page * 6),
-      ]);
+    data && setUsers(userSort(filter).slice(page * 6 - 6, page * 6));
   }, [data, filter, page, userSort]);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleFilterChange = e => {
     setPage(1);
@@ -48,6 +48,7 @@ const TweetsPage = () => {
 
   const handleLodaMoreClick = () => {
     setPage(prev => prev + 1);
+    scrollToTop();
   };
 
   return (
@@ -67,9 +68,9 @@ const TweetsPage = () => {
 
       {users && <UserList users={users} />}
 
-      {users.length >= page * 6 && (
+      {data?.length >= page * 6 && (
         <Button following={true} onClick={handleLodaMoreClick}>
-          Load more
+          Next
         </Button>
       )}
 
