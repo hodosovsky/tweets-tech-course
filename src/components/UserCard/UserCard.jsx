@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import { Box } from 'components/Box/Box';
 import { P } from 'components/P/P';
 import picture1 from '../../images/picture-1.png';
@@ -98,4 +98,14 @@ export const UserCard = ({ user }) => {
       </Button>
     </>
   );
+};
+
+UserCard.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    User: PropTypes.string.isRequired,
+    tweets: PropTypes.string.isRequired,
+    followers: PropTypes.number.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }),
 };
