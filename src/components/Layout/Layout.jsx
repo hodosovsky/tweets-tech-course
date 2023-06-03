@@ -5,7 +5,15 @@ import { Outlet } from 'react-router-dom';
 
 export const Layout = ({ children }) => {
   return (
-    <Box fontFamily="body" padding="26px 36px 36px 36px;" bg="white" as="main">
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      fontFamily="body"
+      padding="26px 36px 36px 36px;"
+      bg="white"
+      as="main"
+    >
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
