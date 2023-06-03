@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/tweets-tech-course/static/css/main.7acaea2f.css",
-    "main.js": "/tweets-tech-course/static/js/main.8597bf14.js",
-    "static/js/63.abe472b9.chunk.js": "/tweets-tech-course/static/js/63.abe472b9.chunk.js",
+    "main.js": "/tweets-tech-course/static/js/main.f3e86823.js",
+    "static/js/63.455b5494.chunk.js": "/tweets-tech-course/static/js/63.455b5494.chunk.js",
     "static/js/562.dc6c7df5.chunk.js": "/tweets-tech-course/static/js/562.dc6c7df5.chunk.js",
     "static/media/picture-2.png": "/tweets-tech-course/static/media/picture-2.014134acdd84a401f00a.png",
     "static/media/picture-1.png": "/tweets-tech-course/static/media/picture-1.010ab3c33bc13f300d33.png",
     "index.html": "/tweets-tech-course/index.html",
     "main.7acaea2f.css.map": "/tweets-tech-course/static/css/main.7acaea2f.css.map",
-    "main.8597bf14.js.map": "/tweets-tech-course/static/js/main.8597bf14.js.map",
-    "63.abe472b9.chunk.js.map": "/tweets-tech-course/static/js/63.abe472b9.chunk.js.map",
+    "main.f3e86823.js.map": "/tweets-tech-course/static/js/main.f3e86823.js.map",
+    "63.455b5494.chunk.js.map": "/tweets-tech-course/static/js/63.455b5494.chunk.js.map",
     "562.dc6c7df5.chunk.js.map": "/tweets-tech-course/static/js/562.dc6c7df5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.8597bf14.js"
+    "static/js/main.f3e86823.js"
   ]
 }
